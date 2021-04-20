@@ -1,0 +1,27 @@
+body,
+#app {
+  background: transparent;
+  // background-color: #f5f7f8;
+  background-color: transparent;
+}
+
+#genhc {
+  --categories-length: 1;
+  --categories-index: 0;
+
+  $category-gb: linear-gradient(
+    to bottom right,
+    hsl(calc(var(--categories-index) * 7 + 270), 100%, 25%),
+    hsl(calc(var(--categories-index) * 7 + 270), 100%, 40%)
+  );
+
+  .theme--dark.v-btn.v-btn--has-bg {
+    background: $category-gb;
+  }
+
+  .theme--dark.v-expansion-panels {
+    .v-expansion-panel {
+      background: $category-gb;
+    }
+  }
+}

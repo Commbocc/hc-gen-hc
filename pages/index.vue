@@ -1,93 +1,126 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <div class="text-center">
-        <logo />
-        <vuetify-logo />
-      </div>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
-        <v-card-text>
-          <p>
-            Vuetify is a progressive Material Design component framework for
-            Vue.js. It was designed to empower developers to create amazing
-            applications.
-          </p>
-          <p>
-            For more information on Vuetify, check out the
-            <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation </a
-            >.
-          </p>
-          <p>
-            If you have questions, please join the official
-            <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-            >
-              discord </a
-            >.
-          </p>
-          <p>
-            Find a bug? Report it on the github
-            <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board </a
-            >.
-          </p>
-          <p>
-            Thank you for developing with Vuetify and I look forward to bringing
-            more exciting features in the future.
-          </p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3" />
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
+  <v-container
+    id="genhc"
+    fill-height
+    :style="`--categories-length: ${categories.length}`"
+  >
+    <!--  -->
+    <v-row id="gen-hc-categories" align="center" justify="center">
+      <!--  -->
+      <v-col cols="12" sm="6">
+        <v-expansion-panels v-model="activeCategoryIndex" dark>
+          <v-expansion-panel
+            v-for="(category, index) in categories"
+            :key="index"
+            :style="`--categories-index: ${index}`"
           >
-            Nuxt Documentation
+            <v-expansion-panel-header class="text-h6 py-5">
+              {{ category.title }}
+            </v-expansion-panel-header>
+
+            <v-card
+              v-if="$vuetify.breakpoint.xs && activeCategory === category"
+              tile
+              class="mb-5"
+              color="rgba(0,0,0,20%)"
+            >
+              <v-img
+                :src="activeCategory.image"
+                :alt="activeCategory.title"
+              ></v-img>
+              <v-card-text class="text-body-1 white--text">
+                <div v-text="activeCategory.body"></div>
+              </v-card-text>
+            </v-card>
+
+            <v-expansion-panel-content>
+              <!-- links -->
+
+              <div>
+                <v-btn
+                  v-for="(link, i) in category.links"
+                  :key="i"
+                  large
+                  block
+                  outlined
+                  rounded
+                  color="white"
+                  class="mb-3"
+                  :target="link.target"
+                  :href="link.url"
+                >
+                  {{ link.title }}
+                </v-btn>
+
+                <!--  -->
+                <v-btn
+                  :href="category.url"
+                  target="_top"
+                  large
+                  block
+                  outlined
+                  rounded
+                  color="white"
+                  class="mb-3"
+                >
+                  "{{ category.title }}" Articles
+                </v-btn>
+              </div>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
+      </v-col>
+
+      <!--  -->
+      <v-col v-if="!$vuetify.breakpoint.xs && activeCategory" cols="12" sm="6">
+        <!-- -->
+        <v-card v-if="activeCategory">
+          <a :href="activeCategory.url" target="_top">
+            <v-img :src="activeCategory.image" :alt="activeCategory.title">
+            </v-img>
           </a>
-          <br />
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt GitHub
-          </a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn color="primary" nuxt to="/inspire"> Continue </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-col>
-  </v-row>
+          <v-card-title>{{ activeCategory.title }}</v-card-title>
+          <v-card-text class="text-body-1">
+            <div v-text="activeCategory.body"></div>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer />
+            <v-btn
+              :href="activeCategory.url"
+              target="_top"
+              rounded
+              dark
+              :style="`--categories-index: ${activeCategoryIndex}`"
+              class="px-5"
+            >
+              {{ btnText }}
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
-
 export default {
-  components: {
-    Logo,
-    VuetifyLogo,
+  components: {},
+
+  async asyncData({ $content }) {
+    const { categories, btnText } = await $content(`data`).fetch()
+
+    return { categories, btnText }
+  },
+
+  data: () => ({
+    activeCategoryIndex: null,
+  }),
+
+  computed: {
+    activeCategory() {
+      if (this.activeCategoryIndex === null) return null
+      return this.categories[this.activeCategoryIndex]
+    },
   },
 }
 </script>
