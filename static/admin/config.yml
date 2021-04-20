@@ -10,7 +10,10 @@ public_folder: /uploads
 collections:
   - name: 'data'
     label: 'Category Data'
+    create: false
     delete: false
+    editor:
+      preview: false
     files:
       - label: 'Categories'
         name: 'categories'
