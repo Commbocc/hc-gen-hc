@@ -12,7 +12,18 @@
       "url": "https://www.hillsboroughcounty.org/en/residents/citizens/gen-hc/career-and-education",
       "image": "/uploads/career-education.jpg",
       "body": "Get guidance along your education and career path with the help of Hillsborough County.",
-      "links": []
+      "links": [
+        {
+          "target": "_top",
+          "title": "See County Job Listings",
+          "url": "https://hillsborough.taleo.net/careersection/county_external/jobsearch.ftl?lang=en"
+        },
+        {
+          "target": "_top",
+          "title": "Apply for an Internship",
+          "url": "https://www.hillsboroughcounty.org/en/residents/citizens/jobs/action-folder/apply-for-an-internship"
+        }
+      ]
     },
     {
       "title": "Fun & Recreation",
