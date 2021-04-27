@@ -41,7 +41,18 @@
       "url": "https://www.hillsboroughcounty.org/en/residents/citizens/gen-hc/life",
       "image": "/uploads/life.jpg",
       "body": "Navigating life as a young adult can be a challenge. From your first place to parenthood, Hillsborough County has resources that can help.",
-      "links": []
+      "links": [
+        {
+          "target": "_top",
+          "title": "Get a Bus Pass",
+          "url": "https://www.hillsboroughcounty.org/en/residents/social-services/transportation/action-folder/apply-for-a-bus-pass"
+        },
+        {
+          "target": "_top",
+          "title": "Apply for Rental & Housing Assistance",
+          "url": "https://www.hillsboroughcounty.org/en/residents/social-services/financial-assistance/action-folder/apply-for-rental-assistance"
+        }
+      ]
     },
     {
       "title": "Leadership",
