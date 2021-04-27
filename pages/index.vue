@@ -45,9 +45,10 @@
                   outlined
                   rounded
                   color="white"
-                  class="mb-3"
+                  class="mb-3 text-truncate"
                   :target="link.target"
                   :href="link.url"
+                  :title="link.title"
                 >
                   {{ link.title }}
                 </v-btn>
@@ -62,6 +63,7 @@
                   rounded
                   color="white"
                   class="mb-3"
+                  :title="`'${category.title}' Articles`"
                 >
                   "{{ category.title }}" Articles
                 </v-btn>
